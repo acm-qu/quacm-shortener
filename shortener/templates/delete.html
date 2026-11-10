@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Delete link - QU ACM{% endblock %}
+
+{% block content %}
+<h1>Delete <span class="accent">/{{ link['slug'] }}</span></h1>
+
+<div class="panel wide">
+  <p>This will permanently remove the short link:</p>
+  <p><strong class="slug-cell">{{ full_url }}</strong></p>
+  <p>which currently points to:</p>
+  <p class="url-cell">{{ link['target_url'] }}</p>
+  <p class="bad">Warning: the short link will stop working immediately,
+     and the name becomes available for someone else to use.</p>
+  <form method="post" action="{{ url_for('admin.link_delete', link_id=link['id']) }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <button type="submit" class="btn-danger-solid">Yes, delete it</button>
+    <a class="btn cancel" href="{{ url_for('admin.dashboard') }}">Cancel</a>
+  </form>
+</div>
+{% endblock %}

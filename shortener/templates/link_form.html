@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}{{ 'Edit link' if mode == 'edit' else 'New link' }} - QU ACM{% endblock %}
+
+{% block content %}
+{% if mode == 'edit' %}
+  <h1>Edit <span class="accent">/{{ link['slug'] }}</span></h1>
+{% else %}
+  <h1>New <span class="accent">short link</span></h1>
+{% endif %}
+
+<form method="post" class="panel wide">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+  {% if mode == 'edit' %}
+    <label for="slug">Short name (cannot be changed)</label>
+    <input id="slug" type="text" value="{{ link['slug'] }}" readonly>
+    <p class="muted">Changing the name would break printed links,
+       so it is locked.</p>
+  {% else %}
+    <label for="slug">Short name (optional)</label>
+    <input id="slug" name="slug" type="text" maxlength="64"
+           value="{{ values['slug'] }}" autocomplete="off">
+    <p class="muted">Letters, numbers, hyphens, underscores.
+       Leave blank and we generate a random name for you.</p>
+  {% endif %}
+
+  <label for="target_url">Destination URL</label>
+  <input id="target_url" name="target_url" type="text" inputmode="url"
+         required maxlength="2048" value="{{ values['target_url'] }}"
+         placeholder="https://example.com/page" autocomplete="off">
+  <p class="muted">Must be the full address, starting with
+     http:// or https://.</p>
+
+  <label for="expires_at">Expires (optional)</label>
+  <input id="expires_at" name="expires_at" type="datetime-local"
+         value="{{ values['expires_at'] }}">
+  <p class="muted">Qatar time (UTC+3). After this moment the link
+     shows our 404 page.</p>
+
+  {% if mode == 'edit' %}
+  <label class="check-label">
+    <input type="checkbox" name="is_active" value="1"
+           {% if link['is_active'] %}checked{% endif %}>
+    Link is active
+  </label>
+  {% endif %}
+
+  <button type="submit">{{ 'Save changes' if mode == 'edit' else 'Create link' }}</button>
+  <a class="btn cancel" href="{{ url_for('admin.dashboard') }}">Cancel</a>
+
+  {% if mode == 'edit' %}
+  <div class="qr-box">
+    <img class="qr-img" src="{{ url_for('admin.link_qr', link_id=link['id']) }}"
+         alt="QR code for /{{ link['slug'] }}">
+    <a class="btn" href="{{ url_for('admin.link_qr', link_id=link['id'], download=1) }}">Download QR</a>
+  </div>
+  {% endif %}
+</form>
+{% endblock %}

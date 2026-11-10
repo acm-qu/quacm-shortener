@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}QU ACM Link Shortener{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="site-header">
+    {# logo.png is a transparent PNG with white lettering:
+       only ever shown on this dark background. #}
+    <img class="logo" src="{{ url_for('static', filename='logo.png') }}"
+         alt="QU ACM Student Chapter">
+  </header>
+
+  <main class="site-main">
+    {# Flash messages: one-time notices like "Invalid username or password." #}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flashes">
+          {% for category, message in messages %}
+            <p class="flash flash-{{ category }}">{{ message }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <p>QU ACM Student Chapter &middot; link.qu.acm.org</p>
+  </footer>
+
+  {# External script file - keeps script-src 'self' in the CSP happy. #}
+  <script src="{{ url_for('static', filename='js/app.js') }}" defer></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+# Local Python environment and caches - never upload these to cPanel
+.venv/
+__pycache__/
+*.pyc
+
+# Real secrets - .env.example is the template, .env has your passwords
+.env
+
+# App log files
+logs/
+deploy/

@@ -1,0 +1,42 @@
+# QU ACM Student Chapter link shortener.
+# Pinned for Python 3.9 so local testing matches cPanel's "Setup Python App"
+# (choose Python 3.9 when creating the app in cPanel).
+# Every package below installs from a prebuilt wheel or is pure Python:
+# no compiler and no system libraries needed on cPanel.
+
+# --- Flask web framework + its exact dependencies ---
+Flask==2.3.3
+Werkzeug==2.3.8
+Jinja2==3.1.4
+MarkupSafe==2.1.5
+itsdangerous==2.1.2
+click==8.1.7
+blinker==1.8.2
+
+# --- PostgreSQL driver (prebuilt wheels; speaks to PostgreSQL 9.6) ---
+psycopg2-binary==2.9.10
+
+# --- Password hashing (prebuilt wheels) ---
+bcrypt==4.2.1
+
+# --- Forms + CSRF (used from Stage 2) ---
+Flask-WTF==1.2.1
+WTForms==3.1.2
+
+# --- Rate limiting, in-memory storage (used from Stage 2) ---
+Flask-Limiter==3.5.0
+limits==3.6.0
+ordered-set==4.1.0
+rich==13.7.0
+markdown-it-py==3.0.0
+mdurl==0.1.2
+pygments==2.17.2
+typing-extensions==4.11.0
+
+# --- QR codes as SVG (used from Stage 4); pure Python, no Pillow needed ---
+qrcode==7.4.2
+pypng==0.20220715.0
+colorama==0.4.6
+
+# --- Reads the local .env settings file (pure Python) ---
+python-dotenv==1.0.1

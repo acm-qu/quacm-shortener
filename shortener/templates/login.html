@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Admin login - QU ACM{% endblock %}
+
+{% block content %}
+<h1><span class="accent">Admin</span> login</h1>
+
+<form method="post" class="panel"
+      action="{{ url_for('admin.login', next=request.args.get('next')) }}">
+  {# CSRF token: required by Flask-WTF on every POST form #}
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+  <label for="username">Username</label>
+  <input id="username" name="username" type="text"
+         autocomplete="username" required autofocus>
+
+  <label for="password">Password</label>
+  <input id="password" name="password" type="password"
+         autocomplete="current-password" required>
+
+  <button type="submit">Sign in</button>
+</form>
+{% endblock %}

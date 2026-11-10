@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block title %}Too many attempts - QU ACM{% endblock %}
+
+{% block content %}
+<h1><span class="accent">429</span> - Too many attempts</h1>
+<p>Too many login attempts from your address right now.
+   Please wait a little while and try again.</p>
+<p><a class="button" href="{{ url_for('admin.login') }}">Back to login</a></p>
+{% endblock %}
