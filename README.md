@@ -113,6 +113,8 @@ quacm-shortener/
 
 Unknown ids under `/admin/links/...` return the branded 404.
 
+Admins log in at /admin (or use the Admin login link on the landing page).
+
 ## Database
 
 PostgreSQL 9.6-compatible by design (see constraints below). Two tables,
