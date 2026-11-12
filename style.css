@@ -1,0 +1,302 @@
+/* QU ACM Student Chapter branding:
+   dark background, cyan accent (#00F0F0), white text. */
+
+:root {
+  --bg: #0a0a0f;
+  --panel: #13131c;
+  --text: #ffffff;
+  --accent: #00f0f0;
+  --muted: #9aa0a6;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+/* Header: logo on the left, navigation menu on the right. On small
+   screens the menu wraps/stacks under the logo (CSS only, no JS). */
+.site-header {
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* The logo is white-on-transparent - never place it on a light box. */
+.logo { height: 72px; width: auto; }
+.logo-link { display: inline-flex; }
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.site-nav a {
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 0.95rem;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+}
+.site-nav a:hover { background: rgba(0, 240, 240, 0.1); }
+.site-nav a.nav-active {
+  border-color: var(--accent);
+  background: rgba(0, 240, 240, 0.08);
+}
+.nav-user {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.nav-logout {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--accent);
+  background: transparent;
+  color: var(--accent);
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+.nav-logout:hover { background: rgba(0, 240, 240, 0.1); }
+
+@media (max-width: 640px) {
+  .site-header { flex-direction: column; align-items: center; }
+  .site-nav { justify-content: center; }
+}
+
+.site-main {
+  flex: 1;
+  max-width: 720px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 32px 24px;
+  text-align: center;
+}
+
+h1 { font-size: 2rem; }
+.accent { color: var(--accent); }
+
+code {
+  background: var(--panel);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.muted { color: var(--muted); }
+
+.button {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 10px 18px;
+  border-radius: 6px;
+  background: transparent;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  text-decoration: none;
+}
+.button:hover { background: rgba(0, 240, 240, 0.1); }
+
+.site-footer {
+  padding: 16px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+/* ---------- Stage 2: flash messages, forms, dashboard table ---------- */
+
+.flashes { text-align: center; }
+.flash {
+  padding: 10px 14px;
+  border-radius: 6px;
+  margin: 0 0 14px;
+  font-size: 0.95rem;
+}
+.flash-error { background: rgba(255, 107, 107, 0.12); border: 1px solid #ff6b6b; }
+.flash-success { background: rgba(61, 220, 132, 0.1); border: 1px solid #3ddc84; }
+
+form.panel {
+  max-width: 380px;
+  margin: 0 auto;
+  padding: 28px 24px;
+  background: var(--panel);
+  border-radius: 8px;
+  text-align: left;
+}
+form.panel label {
+  display: block;
+  margin: 14px 0 4px;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+form.panel input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #2a2a3a;
+  background: #0f0f18;
+  color: var(--text);
+  font-size: 1rem;
+}
+form.panel input:focus {
+  outline: 2px solid var(--accent);
+  border-color: var(--accent);
+}
+form.panel button {
+  width: 100%;
+  margin-top: 18px;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  background: var(--accent);
+  color: #001313;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+form.panel button:hover { filter: brightness(1.1); }
+
+.dash-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.dash-header form { display: inline; }
+.signout {
+  padding: 8px 14px;
+  background: transparent;
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  color: var(--accent);
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+.signout:hover { background: rgba(0, 240, 240, 0.1); }
+
+.links-table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+  background: var(--panel);
+  font-size: 0.95rem;
+}
+.links-table th, .links-table td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid #232330;
+}
+.links-table th { color: var(--accent); }
+.links-table tr:last-child td { border-bottom: none; }
+.url-cell { max-width: 260px; overflow-wrap: anywhere; color: var(--muted); font-size: 0.85rem; }
+.slug-cell { color: var(--accent); }
+.ok { color: #3ddc84; }
+.bad { color: #ff6b6b; }
+
+/* ---------- Stage 3: link management ---------- */
+
+.btn {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--accent);
+  background: transparent;
+  color: var(--accent);
+  font-size: 0.85rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn:hover { background: rgba(0, 240, 240, 0.1); }
+.btn-solid {
+  background: var(--accent);
+  color: #001313;
+  font-weight: 700;
+  border: none;
+  padding: 8px 14px;
+}
+.btn-danger { border-color: #ff6b6b; color: #ff6b6b; }
+.btn-danger:hover { background: rgba(255, 107, 107, 0.1); }
+.btn-danger-solid {
+  background: #ff6b6b;
+  color: #1a0505;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.btn.cancel { margin-top: 8px; }
+
+.dash-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.dash-controls form { display: inline; }
+
+.full-url {
+  display: block;
+  overflow-wrap: anywhere;
+  font-size: 0.85rem;
+  margin-bottom: 4px;
+}
+.copy-btn {
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--accent);
+  background: transparent;
+  color: var(--accent);
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+.copy-btn:hover { background: rgba(0, 240, 240, 0.1); }
+
+.row-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.row-actions form { display: contents; }
+
+form.panel.wide { max-width: 560px; }
+form.panel input[type="checkbox"] { width: auto; }
+form.panel input[readonly] { color: var(--muted); background: #0c0c12; }
+.check-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  color: var(--text);
+  font-size: 0.95rem;
+}
+
+.flash-info { background: rgba(0, 240, 240, 0.08); border: 1px solid var(--accent); }
+
+/* ---------- Stage 4: QR codes ---------- */
+
+.qr-box {
+  margin-top: 20px;
+  text-align: center;
+}
+.qr-img {
+  display: block;
+  width: 160px;
+  height: 160px;
+  margin: 0 auto 8px;
+  background: #ffffff;
+  border-radius: 6px;
+  padding: 6px;
+}

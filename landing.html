@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>QU ACM <span class="accent">Link Shortener</span></h1>
+<p>Short, shareable links for Qatar University ACM Student Chapter
+   events, posters and resources.</p>
+<p class="muted">A short link looks like
+   <code>link.qu.acm.org/<em>slug</em></code> - if it does not exist,
+   you will see our 404 page.</p>
+{% endblock %}
+
+{% block footer_links %}
+<p class="footer-links"><a href="{{ url_for('admin.dashboard') }}">Admin</a></p>
+{% endblock %}

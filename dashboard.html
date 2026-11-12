@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - QU ACM{% endblock %}
+
+{% block content %}
+<div class="dash-header">
+  <h1>Link <span class="accent">dashboard</span></h1>
+</div>
+
+{% if links %}
+<table class="links-table">
+  <thead>
+    <tr>
+      <th>Short link</th>
+      <th>Target URL</th>
+      <th>Clicks</th>
+      <th>Status</th>
+      <th>Created</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for link in links %}
+    <tr>
+      <td class="slug-cell">
+        <span class="full-url">{{ link['full_url'] }}</span>
+        {# Copy logic lives in static/js/app.js (CSP-safe, no inline JS) #}
+        <button type="button" class="copy-btn"
+                data-copy="{{ link['full_url'] }}">Copy</button>
+      </td>
+      <td class="url-cell">
+        <a href="{{ link['target_url'] }}" target="_blank"
+           rel="noopener noreferrer">{{ link['target_url'] }}</a>
+      </td>
+      <td>{{ link['click_count'] }}</td>
+      <td>
+        {% if not link['is_active'] %}
+          <span class="bad">Disabled</span>
+        {% elif link['is_expired'] %}
+          <span class="bad">Expired</span>
+        {% else %}
+          <span class="ok">Active</span>
+        {% endif %}
+      </td>
+      <td>{{ link['created_at'].strftime('%Y-%m-%d %H:%M') }}</td>
+      <td class="row-actions">
+        <a class="btn" href="{{ url_for('admin.link_edit', link_id=link['id']) }}">Edit</a>
+        <form method="post" action="{{ url_for('admin.link_toggle', link_id=link['id']) }}">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <button type="submit" class="btn">
+            {% if link['is_active'] %}Disable{% else %}Enable{% endif %}
+          </button>
+        </form>
+        <a class="btn" href="{{ url_for('admin.link_qr', link_id=link['id']) }}"
+           target="_blank" rel="noopener noreferrer">QR</a>
+        <a class="btn" href="{{ url_for('admin.link_qr', link_id=link['id'], download=1) }}">Download QR</a>
+        <a class="btn btn-danger" href="{{ url_for('admin.link_delete', link_id=link['id']) }}">Delete</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p class="muted">No links yet - create your first one with “+ New link”.</p>
+{% endif %}
+{% endblock %}
