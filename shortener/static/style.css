@@ -21,10 +21,59 @@ body {
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
 }
 
-.site-header { padding: 24px; }
+/* Header: logo on the left, navigation menu on the right. On small
+   screens the menu wraps/stacks under the logo (CSS only, no JS). */
+.site-header {
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
 
 /* The logo is white-on-transparent - never place it on a light box. */
 .logo { height: 72px; width: auto; }
+.logo-link { display: inline-flex; }
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.site-nav a {
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 0.95rem;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+}
+.site-nav a:hover { background: rgba(0, 240, 240, 0.1); }
+.site-nav a.nav-active {
+  border-color: var(--accent);
+  background: rgba(0, 240, 240, 0.08);
+}
+.nav-user {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.nav-logout {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--accent);
+  background: transparent;
+  color: var(--accent);
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+.nav-logout:hover { background: rgba(0, 240, 240, 0.1); }
+
+@media (max-width: 640px) {
+  .site-header { flex-direction: column; align-items: center; }
+  .site-nav { justify-content: center; }
+}
 
 .site-main {
   flex: 1;

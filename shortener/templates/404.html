@@ -2,6 +2,10 @@
 
 {% block title %}Link not found - QU ACM{% endblock %}
 
+{% block navbar %}
+<a href="{{ url_for('public.landing') }}">Go to home page</a>
+{% endblock %}
+
 {% block content %}
 <h1><span class="accent">404</span> - Link not found</h1>
 <p>This short link does not exist, has been disabled, or has expired.</p>

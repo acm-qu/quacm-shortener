@@ -8,3 +8,7 @@
    <code>link.qu.acm.org/<em>slug</em></code> - if it does not exist,
    you will see our 404 page.</p>
 {% endblock %}
+
+{% block footer_links %}
+<p class="footer-links"><a href="{{ url_for('admin.dashboard') }}">Admin</a></p>
+{% endblock %}

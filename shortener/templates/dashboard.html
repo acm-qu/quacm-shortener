@@ -5,16 +5,6 @@
 {% block content %}
 <div class="dash-header">
   <h1>Link <span class="accent">dashboard</span></h1>
-  <div class="dash-controls">
-    <a class="btn btn-solid" href="{{ url_for('admin.link_new') }}">+ New link</a>
-    <span class="muted">Signed in as
-      <strong>{{ session['admin_username'] }}</strong></span>
-    {# Sign out is a POST form with a CSRF token, never a plain link #}
-    <form method="post" action="{{ url_for('admin.logout') }}">
-      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-      <button type="submit" class="btn">Sign out</button>
-    </form>
-  </div>
 </div>
 
 {% if links %}
